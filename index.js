@@ -2,9 +2,9 @@ var net = require('net');
 var rl = require('readline');
 var axios = require('axios');
 var fs = require('fs');
+var path = require('path');
 
-
-var config = JSON.parse(fs.readFileSync('config.json'));
+var config = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'config.json')));
 var phoneToId = config.phoneToId
 
 function nmeaToDegrees(nmea) {

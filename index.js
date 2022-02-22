@@ -22,15 +22,8 @@ var server = net.createServer(function(sock) {
       return;
     }
     console.log('Update from ', modem.id, parseFloat(parts[2])/100, parseFloat(parts[4])/100, line)
-    axios.post(`${config.server}/api/v1/position/report/${modem.group}`, {
-	    id: modem.id,
-	    lat: nmeaToDegrees(parts[2]),
-	    lng: -nmeaToDegrees(parts[4]),
-	    time: new Date().getTime(),
-	    metadata: {
-	      modem: parts.slice(8)
-	    }
-    }).catch(function(err) {
+    axios.get(`${config.server}/api/v1/position/report/${modem.group}?id=${modem.id}&lat=${nmeaToDegrees(parts[2])}&lng=${-nmeaToDegrees(parts[4])}`)
+	    .catch(function(err) {
       // do nothing
     });
   });
